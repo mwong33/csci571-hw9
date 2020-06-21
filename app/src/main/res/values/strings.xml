@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">eBay Catalog Search</string>
+    <string name="keywordLabel">Keyword</string>
+    <string name="keywordHint">Enter Keyword</string>
+    <string name="priceRangeLabel">Price Range</string>
+    <string name="priceFromHint">Minimum Price</string>
+    <string name="priceToHint">Maximum Price</string>
+    <string name="conditionLabel">Condition</string>
+    <string name="conditionNew">New</string>
+    <string name="conditionUsed">Used</string>
+    <string name="conditionUnspecified">Unspecified</string>
+    <string name="sortByLabel">Sort By</string>
     <string-array name="sortByOptions">
         <item>Best Match</item>
         <item>Price: Highest first</item>
         <item>Price + Shipping: Highest first</item>
         <item>Price + Shipping: Lowest first</item>
     </string-array>
+    <string  name="searchButtonText">Search</string>
+    <string name="clearButtonText">Clear</string>
+    <string name="keywordsWarning">Please enter mandatory field</string>
+    <string name="priceRangeWarning">Please enter valid price values</string>
 </resources>

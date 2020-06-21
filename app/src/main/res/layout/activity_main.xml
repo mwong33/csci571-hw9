@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="Keyword"
+        android:text="@string/keywordLabel"
         android:textStyle="bold"
         android:textColor="@color/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +26,8 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:ems="16"
+        android:hint="@string/keywordHint"
         android:inputType="textPersonName"
-        android:hint="Enter Keyword"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/keywordLabel" />
@@ -37,12 +37,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
-        android:text="Price Range"
-        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:text="@string/priceRangeLabel"
         android:textColor="@color/ic_launcher_background"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/keyword" />
+        app:layout_constraintTop_toBottomOf="@+id/keywordsWarning" />
 
     <EditText
         android:id="@+id/priceFrom"
@@ -52,7 +52,7 @@
         android:layout_marginTop="10dp"
         android:ems="7"
         android:inputType="number"
-        android:hint="Minimum Price"
+        android:hint="@string/priceFromHint"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceRangeLabel" />
@@ -65,7 +65,7 @@
         android:layout_marginTop="10dp"
         android:ems="7"
         android:inputType="number"
-        android:hint="Maximum Price"
+        android:hint="@string/priceToHint"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toEndOf="@+id/priceFrom"
         app:layout_constraintTop_toBottomOf="@+id/priceRangeLabel" />
@@ -75,12 +75,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
-        android:text="Condition"
-        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:text="@string/conditionLabel"
         android:textColor="@color/ic_launcher_background"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceFrom" />
+        app:layout_constraintTop_toBottomOf="@+id/priceRangeWarning" />
 
     <CheckBox
         android:id="@+id/conditionNew"
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
-        android:text="New"
+        android:text="@string/conditionNew"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/conditionLabel" />
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="10dp"
-        android:text="Used"
+        android:text="@string/conditionUsed"
         android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/conditionNew"
         app:layout_constraintTop_toBottomOf="@+id/conditionLabel" />
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="10dp"
-        android:text="Unspecified"
+        android:text="@string/conditionUnspecified"
         android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/conditionUsed"
         app:layout_constraintTop_toBottomOf="@+id/conditionLabel" />
@@ -121,7 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
-        android:text="Sort By"
+        android:text="@string/sortByLabel"
         android:textStyle="bold"
         android:textColor="@color/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +145,7 @@
         android:background="@color/ic_launcher_background"
         android:ems="10"
         android:onClick="search"
-        android:text="Search"
+        android:text="@string/searchButtonText"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sortBy" />
@@ -157,10 +157,36 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="35dp"
         android:ems="10"
-        android:text="Clear"
+        android:text="@string/clearButtonText"
         android:background="@color/ic_launcher_background"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sortBy" />
+
+    <TextView
+        android:id="@+id/keywordsWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/keywordsWarning"
+        android:textColor="@color/red"
+        android:textStyle="italic"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyword" />
+
+    <TextView
+        android:id="@+id/priceRangeWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/priceRangeWarning"
+        android:textColor="@color/red"
+        android:textStyle="italic"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceFrom" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
