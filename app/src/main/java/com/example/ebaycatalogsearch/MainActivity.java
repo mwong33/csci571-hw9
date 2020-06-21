@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -83,5 +84,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Toast.makeText(MainActivity.this, "Please fix all fields with errors",
                     Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void clear(View view) {
+
+        // Remove ALL warnings
+        TextView keywordWarning = findViewById(R.id.keywordsWarning);
+        TextView priceRangeWarning = findViewById(R.id.priceRangeWarning);
+
+        keywordWarning.setVisibility(View.GONE);
+        priceRangeWarning.setVisibility(View.GONE);
+
+        // Clear/Reset ALL fields
+        TextView keyword = findViewById(R.id.keyword);
+        keyword.setText("");
+
+        TextView priceFrom = findViewById(R.id.priceFrom);
+        priceFrom.setText("");
+
+        TextView priceTo = findViewById(R.id.priceTo);
+        priceTo.setText("");
+
+        CheckBox conditionNew = findViewById(R.id.conditionNew);
+        conditionNew.setChecked(false);
+
+        CheckBox conditionUsed = findViewById(R.id.conditionUsed);
+        conditionUsed.setChecked(false);
+
+        CheckBox conditionUnspecified = findViewById(R.id.conditionUnspecified);
+        conditionUnspecified.setChecked(false);
+
+        Spinner sortBy = findViewById(R.id.sortBy);
+        sortBy.setSelection(0);
+
     }
 }
