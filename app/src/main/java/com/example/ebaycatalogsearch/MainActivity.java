@@ -43,12 +43,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Check to make sure keyword field is NOT empty
         EditText keyword = (EditText) findViewById(R.id.keyword);
         String keywordString = keyword.getText().toString();
+        TextView keywordWarning = (TextView) findViewById(R.id.keywordsWarning);
 
         if (keywordString == null || keywordString.length() == 0) {
-            TextView keywordWarning = (TextView) findViewById(R.id.keywordsWarning);
             keywordWarning.setVisibility(View.VISIBLE);
         } else {
-            TextView keywordWarning = (TextView) findViewById(R.id.keywordsWarning);
             keywordWarning.setVisibility(View.GONE);
         }
 
@@ -56,12 +55,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         EditText priceFrom = (EditText) findViewById(R.id.priceFrom);
         EditText priceTo = (EditText) findViewById(R.id.priceTo);
 
-        System.out.println(priceFrom.getText().toString());
+        String priceFromString = priceFrom.getText().toString();
+        String priceToString = priceTo.getText().toString();
+        TextView priceRangeWarning = (TextView) findViewById(R.id.priceRangeWarning);
 
-//        int priceFromValue = Integer.parseInt(priceFrom.getText().toString());
-//        int priceToValue = Integer.parseInt(priceTo.getText().toString());
-//
-//        System.out.println(priceFromValue);
-//        System.out.println(priceToValue);
+        if (!priceFromString.equals("") && Integer.parseInt(priceFromString) < 0) {
+            priceRangeWarning.setVisibility(View.VISIBLE);
+        } else if (!priceToString.equals("") && Integer.parseInt(priceToString) < 0) {
+            priceRangeWarning.setVisibility(View.VISIBLE);
+        } else if ((!priceFromString.equals("") && !priceToString.equals("")) &&
+                (Integer.parseInt(priceFromString) > Integer.parseInt(priceToString))) {
+                priceRangeWarning.setVisibility(View.VISIBLE);
+        } else {
+            priceRangeWarning.setVisibility(View.GONE);
+        }
     }
 }
