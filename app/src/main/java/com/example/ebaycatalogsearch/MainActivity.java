@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Check to make sure keyword field is NOT empty
         EditText keyword = (EditText) findViewById(R.id.keyword);
         String keywordString = keyword.getText().toString();
-        System.out.println(keywordString);
+
+        if (keywordString.length() == 0) {
+            System.out.println("Zero Keyword!");
+        }
     }
 }

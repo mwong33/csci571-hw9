@@ -27,7 +27,7 @@
         android:layout_marginTop="10dp"
         android:ems="16"
         android:inputType="textPersonName"
-        android:text="Enter Keyword"
+        android:hint="Enter Keyword"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/keywordLabel" />
@@ -52,7 +52,7 @@
         android:layout_marginTop="10dp"
         android:ems="7"
         android:inputType="textPersonName"
-        android:text="Minimum Price"
+        android:hint="Minimum Price"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceRangeLabel" />
@@ -65,7 +65,7 @@
         android:layout_marginTop="10dp"
         android:ems="7"
         android:inputType="textPersonName"
-        android:text="Maximum Price"
+        android:hint="Maximum Price"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toEndOf="@+id/priceFrom"
         app:layout_constraintTop_toBottomOf="@+id/priceRangeLabel" />
