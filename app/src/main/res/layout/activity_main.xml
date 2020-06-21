@@ -28,4 +28,88 @@
         android:text="Enter Keyword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/keywordLabel" />
+
+    <TextView
+        android:id="@+id/priceRangeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="Price Range"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyword" />
+
+    <EditText
+        android:id="@+id/priceFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:ems="7"
+        android:inputType="textPersonName"
+        android:text="Minimum Price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceRangeLabel" />
+
+    <EditText
+        android:id="@+id/priceTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:ems="7"
+        android:inputType="textPersonName"
+        android:text="Maximum Price"
+        app:layout_constraintStart_toEndOf="@+id/priceFrom"
+        app:layout_constraintTop_toBottomOf="@+id/priceRangeLabel" />
+
+    <TextView
+        android:id="@+id/conditionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="Condition"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceFrom" />
+
+    <CheckBox
+        android:id="@+id/conditionNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="New"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conditionLabel" />
+
+    <CheckBox
+        android:id="@+id/conditionUsed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="10dp"
+        android:text="Used"
+        app:layout_constraintStart_toEndOf="@+id/conditionNew"
+        app:layout_constraintTop_toBottomOf="@+id/conditionLabel" />
+
+    <CheckBox
+        android:id="@+id/conditionUnspecified"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="10dp"
+        android:text="Unspecified"
+        app:layout_constraintStart_toEndOf="@+id/conditionUsed"
+        app:layout_constraintTop_toBottomOf="@+id/conditionLabel" />
+
+    <TextView
+        android:id="@+id/sortByLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="Sort By"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conditionNew" />
 </androidx.constraintlayout.widget.ConstraintLayout>
