@@ -51,7 +51,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:ems="7"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:hint="Minimum Price"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:ems="7"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:hint="Maximum Price"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toEndOf="@+id/priceFrom"
@@ -162,4 +162,5 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sortBy" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
