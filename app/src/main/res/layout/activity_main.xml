@@ -113,16 +113,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/conditionNew" />
 
+    <Spinner
+        android:id="@+id/sortBy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sortByLabel" />
+
     <Button
         android:id="@+id/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="10dp"
-        android:text="Search"
         android:ems="10"
+        android:text="Search"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sortByLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/sortBy" />
 
     <Button
         android:id="@+id/clear"
@@ -130,8 +139,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="35dp"
-        android:text="Clear"
         android:ems="10"
+        android:text="Clear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sortByLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/sortBy" />
 </androidx.constraintlayout.widget.ConstraintLayout>
