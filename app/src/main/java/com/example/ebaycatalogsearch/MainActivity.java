@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -40,34 +41,47 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void search(View view) {
+
+        // boolean to check if any fields are invalid
+        boolean invalidFields = false;
+
         // Check to make sure keyword field is NOT empty
-        EditText keyword = (EditText) findViewById(R.id.keyword);
+        EditText keyword = findViewById(R.id.keyword);
         String keywordString = keyword.getText().toString();
-        TextView keywordWarning = (TextView) findViewById(R.id.keywordsWarning);
+        TextView keywordWarning = findViewById(R.id.keywordsWarning);
 
         if (keywordString == null || keywordString.length() == 0) {
             keywordWarning.setVisibility(View.VISIBLE);
+            invalidFields = true;
         } else {
             keywordWarning.setVisibility(View.GONE);
         }
 
         // Check to make sure price ranges are valid
-        EditText priceFrom = (EditText) findViewById(R.id.priceFrom);
-        EditText priceTo = (EditText) findViewById(R.id.priceTo);
+        EditText priceFrom = findViewById(R.id.priceFrom);
+        EditText priceTo = findViewById(R.id.priceTo);
 
         String priceFromString = priceFrom.getText().toString();
         String priceToString = priceTo.getText().toString();
-        TextView priceRangeWarning = (TextView) findViewById(R.id.priceRangeWarning);
+        TextView priceRangeWarning = findViewById(R.id.priceRangeWarning);
 
         if (!priceFromString.equals("") && Integer.parseInt(priceFromString) < 0) {
             priceRangeWarning.setVisibility(View.VISIBLE);
+            invalidFields = true;
         } else if (!priceToString.equals("") && Integer.parseInt(priceToString) < 0) {
             priceRangeWarning.setVisibility(View.VISIBLE);
+            invalidFields = true;
         } else if ((!priceFromString.equals("") && !priceToString.equals("")) &&
                 (Integer.parseInt(priceFromString) > Integer.parseInt(priceToString))) {
-                priceRangeWarning.setVisibility(View.VISIBLE);
+            priceRangeWarning.setVisibility(View.VISIBLE);
+            invalidFields = true;
         } else {
             priceRangeWarning.setVisibility(View.GONE);
+        }
+
+        if (invalidFields) {
+            Toast.makeText(MainActivity.this, "Please fix all fields with errors",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }
