@@ -14,6 +14,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="Keyword"
+        android:textStyle="bold"
+        android:textColor="@color/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +28,7 @@
         android:ems="16"
         android:inputType="textPersonName"
         android:text="Enter Keyword"
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/keywordLabel" />
 
@@ -36,6 +39,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:text="Price Range"
+        android:textStyle="bold"
+        android:textColor="@color/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/keyword" />
 
@@ -48,6 +53,7 @@
         android:ems="7"
         android:inputType="textPersonName"
         android:text="Minimum Price"
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceRangeLabel" />
 
@@ -60,6 +66,7 @@
         android:ems="7"
         android:inputType="textPersonName"
         android:text="Maximum Price"
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toEndOf="@+id/priceFrom"
         app:layout_constraintTop_toBottomOf="@+id/priceRangeLabel" />
 
@@ -70,6 +77,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:text="Condition"
+        android:textStyle="bold"
+        android:textColor="@color/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceFrom" />
 
@@ -80,6 +89,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:text="New"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/conditionLabel" />
 
@@ -90,6 +100,7 @@
         android:layout_marginStart="45dp"
         android:layout_marginTop="10dp"
         android:text="Used"
+        android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/conditionNew"
         app:layout_constraintTop_toBottomOf="@+id/conditionLabel" />
 
@@ -100,6 +111,7 @@
         android:layout_marginStart="45dp"
         android:layout_marginTop="10dp"
         android:text="Unspecified"
+        android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/conditionUsed"
         app:layout_constraintTop_toBottomOf="@+id/conditionLabel" />
 
@@ -110,6 +122,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:text="Sort By"
+        android:textStyle="bold"
+        android:textColor="@color/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/conditionNew" />
 
@@ -127,9 +141,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:text="Search"
+        android:background="@color/ic_launcher_background"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sortBy" />
 
@@ -137,10 +153,12 @@
         android:id="@+id/clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="35dp"
         android:ems="10"
         android:text="Clear"
+        android:background="@color/ic_launcher_background"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sortBy" />
 </androidx.constraintlayout.widget.ConstraintLayout>
