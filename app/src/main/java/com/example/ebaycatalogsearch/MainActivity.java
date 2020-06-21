@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -35,5 +36,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    public void search(View view) {
+        // Check to make sure keyword field is NOT empty
+        EditText keyword = (EditText) findViewById(R.id.keyword);
+        String keywordString = keyword.getText().toString();
+        System.out.println(keywordString);
     }
 }
