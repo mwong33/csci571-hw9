@@ -14,20 +14,45 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    // Form Fields
+    private EditText keyword;
+    private EditText priceFrom;
+    private EditText priceTo;
+    private CheckBox conditionNew;
+    private CheckBox conditionUsed;
+    private CheckBox conditionUnspecified;
+    private Spinner sortBy;
+
+    // Warnings
+    private TextView keywordWarning;
+    private TextView priceRangeWarning;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Spinner sortBySpinner = findViewById(R.id.sortBy);
+        // Initialize the Form fields
+        keyword = findViewById(R.id.keyword);
+        priceFrom = findViewById(R.id.priceFrom);
+        priceTo = findViewById(R.id.priceTo);
+        conditionNew = findViewById(R.id.conditionNew);
+        conditionUsed = findViewById(R.id.conditionUsed);
+        conditionUnspecified = findViewById(R.id.conditionUnspecified);
+        sortBy = findViewById(R.id.sortBy);
+
         ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(
                         this, R.array.sortByOptions, android.R.layout.simple_spinner_item);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortBySpinner.setAdapter(adapter);
-        sortBySpinner.setOnItemSelectedListener(this);
+        sortBy.setAdapter(adapter);
+        sortBy.setOnItemSelectedListener(this);
+
+        // Initialize the warnings
+        keywordWarning = findViewById(R.id.keywordsWarning);
+        priceRangeWarning = findViewById(R.id.priceRangeWarning);
 
     }
 
@@ -47,9 +72,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         boolean invalidFields = false;
 
         // Check to make sure keyword field is NOT empty
-        EditText keyword = findViewById(R.id.keyword);
         String keywordString = keyword.getText().toString();
-        TextView keywordWarning = findViewById(R.id.keywordsWarning);
 
         if (keywordString == null || keywordString.length() == 0) {
             keywordWarning.setVisibility(View.VISIBLE);
@@ -59,12 +82,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         // Check to make sure price ranges are valid
-        EditText priceFrom = findViewById(R.id.priceFrom);
-        EditText priceTo = findViewById(R.id.priceTo);
-
         String priceFromString = priceFrom.getText().toString();
         String priceToString = priceTo.getText().toString();
-        TextView priceRangeWarning = findViewById(R.id.priceRangeWarning);
 
         if (!priceFromString.equals("") && Integer.parseInt(priceFromString) < 0) {
             priceRangeWarning.setVisibility(View.VISIBLE);
@@ -89,32 +108,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void clear(View view) {
 
         // Remove ALL warnings
-        TextView keywordWarning = findViewById(R.id.keywordsWarning);
-        TextView priceRangeWarning = findViewById(R.id.priceRangeWarning);
-
         keywordWarning.setVisibility(View.GONE);
         priceRangeWarning.setVisibility(View.GONE);
 
         // Clear/Reset ALL fields
-        TextView keyword = findViewById(R.id.keyword);
         keyword.setText("");
 
-        TextView priceFrom = findViewById(R.id.priceFrom);
         priceFrom.setText("");
-
-        TextView priceTo = findViewById(R.id.priceTo);
         priceTo.setText("");
 
-        CheckBox conditionNew = findViewById(R.id.conditionNew);
         conditionNew.setChecked(false);
-
-        CheckBox conditionUsed = findViewById(R.id.conditionUsed);
         conditionUsed.setChecked(false);
-
-        CheckBox conditionUnspecified = findViewById(R.id.conditionUnspecified);
         conditionUnspecified.setChecked(false);
 
-        Spinner sortBy = findViewById(R.id.sortBy);
         sortBy.setSelection(0);
 
     }
