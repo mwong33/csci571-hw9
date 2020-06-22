@@ -2,6 +2,7 @@ package com.example.ebaycatalogsearch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    // Constants
+    public static final String RESPONSE_STRING = "com.example.ebaycatalogsearch.RESPONSE_STRING";
 
     // Form Fields
     private EditText keywords;
@@ -195,6 +199,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("Rest Response", response.toString());
+                        Intent intent = new Intent(getApplicationContext(), Catalog.class);
+
+                        String responseString = response.toString();
+                        intent.putExtra(RESPONSE_STRING, responseString);
+
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
             @Override
