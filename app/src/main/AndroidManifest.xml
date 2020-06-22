@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Catalog"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity"
+            android:label="Search Results"></activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.Launcher">
