@@ -3,6 +3,7 @@ package com.example.ebaycatalogsearch;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -187,13 +188,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         url += "&sortBy=" + sortByValue;
 
-        System.out.println(url);
+        Log.e("URL", url);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
+                        Log.e("Rest Response", response.toString());
                     }
                 }, new Response.ErrorListener() {
             @Override
