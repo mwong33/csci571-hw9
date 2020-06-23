@@ -30,6 +30,8 @@ public class Catalog extends AppCompatActivity {
         requestUrl = intent.getStringExtra(MainActivity.REQUEST_URL);
         requestKeywords = intent.getStringExtra(MainActivity.REQUEST_KEYWORDS);
 
+        Log.e("Catalog.java - url", requestUrl);
+
         try {
             responseJSON = new JSONObject(responseString);
         } catch (JSONException e) {

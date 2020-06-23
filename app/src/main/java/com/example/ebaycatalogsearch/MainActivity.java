@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     // Request Object
     private RequestQueue requestQueue;
 
+    // Request URL String
+    private String url;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -78,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // Initialize the Request Queue
         requestQueue = Volley.newRequestQueue(this);
+
+        // Make the urlString blank for now
+        url = "";
     }
 
     @Override
@@ -153,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void getItems() {
-        String url = "https://mjwong-csci-571-hw8.wl.r.appspot.com/items?";
+        url = "https://mjwong-csci-571-hw8.wl.r.appspot.com/items?";
 
         // Add the Keywords
         url += "keywords=" + keywords.getText().toString();
@@ -194,22 +200,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         url += "&sortBy=" + sortByValue;
 
-        // Pass the URL and keywords to the Catalog Activity
-        Intent intent = new Intent(getApplicationContext(), Catalog.class);
-        intent.putExtra(REQUEST_URL, url);
-        intent.putExtra(REQUEST_KEYWORDS, keywords.getText().toString());
-
-        Log.e("URL", url);
+        Log.e("MainActivity.java - url", url);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("Rest Response", response.toString());
+                        Log.e("MainActivity.java - response", response.toString());
                         Intent intent = new Intent(getApplicationContext(), Catalog.class);
 
+                        // Pass the URL, keywords and responseString to the Catalog Activity
                         String responseString = response.toString();
                         intent.putExtra(RESPONSE_STRING, responseString);
+                        intent.putExtra(REQUEST_KEYWORDS, keywords.getText().toString());
+                        intent.putExtra(REQUEST_URL, url);
 
                         startActivity(intent);
                     }
