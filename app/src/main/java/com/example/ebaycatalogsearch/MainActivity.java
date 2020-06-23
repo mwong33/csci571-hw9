@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     // Constants
     public static final String RESPONSE_STRING = "com.example.ebaycatalogsearch.RESPONSE_STRING";
     public static final String REQUEST_URL = "com.example.ebaycatalogsearch.REQUEST_URL";
+    public static final String REQUEST_KEYWORDS = "com.example.ebaycatalogsearch.REQUEST_KEYWORDS";
 
     // Form Fields
     private EditText keywords;
@@ -193,9 +194,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         url += "&sortBy=" + sortByValue;
 
-        // Pass the URL to the Catalog Activity
+        // Pass the URL and keywords to the Catalog Activity
         Intent intent = new Intent(getApplicationContext(), Catalog.class);
         intent.putExtra(REQUEST_URL, url);
+        intent.putExtra(REQUEST_KEYWORDS, keywords.getText().toString());
 
         Log.e("URL", url);
 

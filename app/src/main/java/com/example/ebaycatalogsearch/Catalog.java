@@ -10,6 +10,7 @@ public class Catalog extends AppCompatActivity {
 
     private String responseString;
     private String requestUrl;
+    private String requestKeywords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +20,6 @@ public class Catalog extends AppCompatActivity {
         Intent intent = getIntent();
         responseString = intent.getStringExtra(MainActivity.RESPONSE_STRING);
         requestUrl = intent.getStringExtra(MainActivity.REQUEST_URL);
-
-        TextView demo = findViewById(R.id.demo);
-
-        demo.setText(responseString);
+        requestKeywords = intent.getStringExtra(MainActivity.REQUEST_KEYWORDS);
     }
 }
