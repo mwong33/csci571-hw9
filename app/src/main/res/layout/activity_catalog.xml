@@ -48,14 +48,23 @@
             android:layout_marginTop="8dp"
             android:text="Showing ??? results for ???"
             android:textStyle="bold"
-            android:visibility="gone"  />
+            android:visibility="visible"  />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:visibility="visible">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </ScrollView>
 
     </LinearLayout>
 
