@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -101,9 +102,7 @@ public class Catalog extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Display the item count display
-                            TextView itemCountDisplay = findViewById(R.id.itemCountDisplay);
-                            itemCountDisplay.setText(createItemCountDisplay());
-                            itemCountDisplay.setVisibility(View.VISIBLE);
+                            createItemCountDisplay();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -116,24 +115,14 @@ public class Catalog extends AppCompatActivity {
 
     }
 
-    private SpannableString createItemCountDisplay() {
-        String rawItemCountDisplayString = "Showing " + itemCount + " results for " + requestKeywords;
+    private void createItemCountDisplay() {
 
-        int itemCountStartIndex = 8;
-        int itemCountEndIndex = itemCountStartIndex + String.valueOf(itemCount).length();
+        String htmlItemCountDisplayString = "<p>Showing <span style=\"color:#0063D1\">" + itemCount + "</span> results for "
+                + "<span style=\"color:#0063D1\">" + requestKeywords + "</span></p>";
 
-        int requestKeywordsStartIndex = itemCountStartIndex + String.valueOf(itemCount).length() + 13;
-        int requestKeywordsEndIndex = rawItemCountDisplayString.length();
+        itemCountDisplay.setText(Html.fromHtml(htmlItemCountDisplayString));
 
-        SpannableString itemCountDisplayString = new SpannableString(rawItemCountDisplayString);
-
-        ForegroundColorSpan fcsBlue1 = new ForegroundColorSpan(Color.BLUE);
-        ForegroundColorSpan fcsBlue2 = new ForegroundColorSpan(Color.BLUE);
-
-        itemCountDisplayString.setSpan(fcsBlue1, itemCountStartIndex, itemCountEndIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        itemCountDisplayString.setSpan(fcsBlue2, requestKeywordsStartIndex, requestKeywordsEndIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        return itemCountDisplayString;
+        itemCountDisplay.setVisibility(View.VISIBLE);
     }
 
 }
