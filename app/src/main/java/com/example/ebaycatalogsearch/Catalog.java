@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,6 +41,9 @@ public class Catalog extends AppCompatActivity {
     private ProgressBar catalogProgressBar;
     private TextView catalogProgressText;
 
+    // No Records element
+    private TextView noRecords;
+
     // Catalog elements
     private TextView itemCountDisplay;
 
@@ -56,6 +60,9 @@ public class Catalog extends AppCompatActivity {
         // Initialize the Loading Bar elements
         catalogProgressBar = findViewById(R.id.catalogProgressBar);
         catalogProgressText = findViewById(R.id.catalogProgressText);
+
+        // Initialize the No Records element
+        noRecords = findViewById(R.id.noRecords);
 
         // Initialize the Catalog elements
         itemCountDisplay = findViewById(R.id.itemCountDisplay);
@@ -87,10 +94,17 @@ public class Catalog extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        // Display the item count display
-                        TextView itemCountDisplay = findViewById(R.id.itemCountDisplay);
-                        itemCountDisplay.setText(createItemCountDisplay());
-                        itemCountDisplay.setVisibility(View.VISIBLE);
+                        if (itemCount == 0) {
+                            // Display the No Records message and No Records Toast
+                            noRecords.setVisibility(View.VISIBLE);
+                            Toast.makeText(Catalog.this, "No Records",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Display the item count display
+                            TextView itemCountDisplay = findViewById(R.id.itemCountDisplay);
+                            itemCountDisplay.setText(createItemCountDisplay());
+                            itemCountDisplay.setVisibility(View.VISIBLE);
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
