@@ -9,7 +9,16 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,46 +26,79 @@ import org.json.JSONObject;
 
 public class Catalog extends AppCompatActivity {
 
-    private String responseString;
+    // Response and Request Data
     private String requestUrl;
     private String requestKeywords;
     private JSONObject responseJSON;
     private JSONArray responseItemsArray;
     private int itemCount;
 
+    // Request Object
+    private RequestQueue requestQueue;
+
+    // Loading Bar elements
+    private ProgressBar catalogProgressBar;
+    private TextView catalogProgressText;
+
+    // Catalog elements
+    private TextView itemCountDisplay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
+        // Acquire the Request URL and Request Keywords from MainActivity.java
         Intent intent = getIntent();
-        responseString = intent.getStringExtra(MainActivity.RESPONSE_STRING);
         requestUrl = intent.getStringExtra(MainActivity.REQUEST_URL);
         requestKeywords = intent.getStringExtra(MainActivity.REQUEST_KEYWORDS);
 
-        Log.e("Catalog.java - url", requestUrl);
+        // Initialize the Loading Bar elements
+        catalogProgressBar = findViewById(R.id.catalogProgressBar);
+        catalogProgressText = findViewById(R.id.catalogProgressText);
 
-        try {
-            responseJSON = new JSONObject(responseString);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        // Initialize the Catalog elements
+        itemCountDisplay = findViewById(R.id.itemCountDisplay);
 
-        try {
-            responseItemsArray = responseJSON.getJSONArray("items");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        // Initialize the requestQueue
+        requestQueue = Volley.newRequestQueue(this);
 
-        try {
-            itemCount = Integer.parseInt(responseJSON.getString("itemCount"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        // Execute the HTTP Request
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, requestUrl, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
 
-        TextView itemCountDisplay = findViewById(R.id.itemCountDisplay);
-        itemCountDisplay.setText(createItemCountDisplay());
+                        // Remove the loading bar once response is complete
+                        catalogProgressBar.setVisibility(View.GONE);
+                        catalogProgressText.setVisibility(View.GONE);
 
+                        // Acquire the data
+                        responseJSON = response;
+                        try {
+                            responseItemsArray = responseJSON.getJSONArray("items");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            itemCount = Integer.parseInt(responseJSON.getString("itemCount"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Display the item count display
+                        TextView itemCountDisplay = findViewById(R.id.itemCountDisplay);
+                        itemCountDisplay.setText(createItemCountDisplay());
+                        itemCountDisplay.setVisibility(View.VISIBLE);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
 
     }
 

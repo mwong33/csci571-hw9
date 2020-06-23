@@ -14,18 +14,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // Constants
@@ -45,9 +33,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     // Warnings
     private TextView keywordWarning;
     private TextView priceRangeWarning;
-
-    // Request Object
-    private RequestQueue requestQueue;
 
     // Request URL String
     private String url;
@@ -78,9 +63,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Initialize the warnings
         keywordWarning = findViewById(R.id.keywordsWarning);
         priceRangeWarning = findViewById(R.id.priceRangeWarning);
-
-        // Initialize the Request Queue
-        requestQueue = Volley.newRequestQueue(this);
 
         // Make the urlString blank for now
         url = "";
@@ -201,28 +183,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         url += "&sortBy=" + sortByValue;
 
         Log.e("MainActivity.java - url", url);
+        Log.e("MainActivit.java - keywords", keywords.getText().toString());
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e("MainActivity.java - response", response.toString());
-                        Intent intent = new Intent(getApplicationContext(), Catalog.class);
+        Intent intent = new Intent(getApplicationContext(), Catalog.class);
+        intent.putExtra(REQUEST_KEYWORDS, keywords.getText().toString());
+        intent.putExtra(REQUEST_URL, url);
 
-                        // Pass the URL, keywords and responseString to the Catalog Activity
-                        String responseString = response.toString();
-                        intent.putExtra(RESPONSE_STRING, responseString);
-                        intent.putExtra(REQUEST_KEYWORDS, keywords.getText().toString());
-                        intent.putExtra(REQUEST_URL, url);
-
-                        startActivity(intent);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        requestQueue.add(request);
+        startActivity(intent);
     }
 }
