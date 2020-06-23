@@ -8,13 +8,17 @@ import android.widget.TextView;
 
 public class Catalog extends AppCompatActivity {
 
+    private String responseString;
+    private String requestUrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
         Intent intent = getIntent();
-        String responseString = intent.getStringExtra(MainActivity.RESPONSE_STRING);
+        responseString = intent.getStringExtra(MainActivity.RESPONSE_STRING);
+        requestUrl = intent.getStringExtra(MainActivity.REQUEST_URL);
 
         TextView demo = findViewById(R.id.demo);
 
