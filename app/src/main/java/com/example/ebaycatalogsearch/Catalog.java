@@ -117,9 +117,6 @@ public class Catalog extends AppCompatActivity {
                             Toast.makeText(Catalog.this, "No Records",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            // Display the item count display
-                            createItemCountDisplay();
-
                             // Create an array of the CatalogCard objects
                             ArrayList<CatalogCard> catalogCardArrayList = new ArrayList<>();
                             try {
@@ -127,6 +124,9 @@ public class Catalog extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+
+                            // Display the item count display
+                            createItemCountDisplay(catalogCardArrayList.size());
 
                             // Setup the Grid View
                             recyclerView = findViewById(R.id.recyclerView);
@@ -150,9 +150,9 @@ public class Catalog extends AppCompatActivity {
 
     }
 
-    private void createItemCountDisplay() {
+    private void createItemCountDisplay(int catalogCardCount) {
 
-        String htmlItemCountDisplayString = "<p>Showing <span style=\"color:#0063D1\">" + itemCount + "</span> results for "
+        String htmlItemCountDisplayString = "<p>Showing <span style=\"color:#0063D1\">" + catalogCardCount + "</span> results for "
                 + "<span style=\"color:#0063D1\">" + requestKeywords + "</span></p>";
 
         itemCountDisplay.setText(Html.fromHtml(htmlItemCountDisplayString));
