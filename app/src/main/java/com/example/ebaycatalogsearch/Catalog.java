@@ -168,9 +168,10 @@ public class Catalog extends AppCompatActivity {
 
             JSONObject item = responseItemsArray.getJSONObject(i);
 
+            String catalogCardImageUrl = item.getString("galleryURL");
             String catalogCardTitle = item.getString("title");
 
-            catalogCardArrayList.add(new CatalogCard(catalogCardTitle));
+            catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle));
         }
 
         return catalogCardArrayList;
