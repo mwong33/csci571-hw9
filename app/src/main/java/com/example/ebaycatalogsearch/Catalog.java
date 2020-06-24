@@ -180,9 +180,9 @@ public class Catalog extends AppCompatActivity {
             String catalogCardShipping = "";
 
             if (shippingCost.equals("0.0")) {
-                catalogCardShipping = "FREE Shipping";
+                catalogCardShipping = "<p><b>FREE</b> Shipping</p>";
             } else {
-                catalogCardShipping = "Ships for $" + shippingCost;
+                catalogCardShipping = "Ships for <b>$" + shippingCost + "</b>";
             }
 
             catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle, catalogCardShipping));

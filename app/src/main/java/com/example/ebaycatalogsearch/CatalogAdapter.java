@@ -61,7 +61,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         holder.catalogCardTitle.setText(Html.fromHtml(catalogCardTitleHTML));
 
         // Setting the Catalog Card Shipping Details
-        holder.catalogCardShipping.setText(currentCatalogCard.getCatalogCardShipping());
+        holder.catalogCardShipping.setText(Html.fromHtml(currentCatalogCard.getCatalogCardShipping()));
 
     }
 
