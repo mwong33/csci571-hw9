@@ -1,4 +1,5 @@
 package com.example.ebaycatalogsearch;
+import android.text.Html;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +52,9 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         Picasso.with(holder.catalogCardImage.getContext()).load(catalogCardImageUrl).into(holder.catalogCardImage);
 
         // Setting the Catalog Card Title
-        holder.catalogCardTitle.setText(currentCatalogCard.getCatalogCardTitle());
+        String catalogCardTitleHTML = "<p>" + currentCatalogCard.getCatalogCardTitle() + "</p>";
+
+        holder.catalogCardTitle.setText(Html.fromHtml(catalogCardTitleHTML));
 
     }
 
