@@ -185,7 +185,14 @@ public class Catalog extends AppCompatActivity {
                 catalogCardShipping = "Ships for <b>$" + shippingCost + "</b>";
             }
 
-            catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle, catalogCardShipping));
+            // Get the Catalog Card Top Rated info. If it is we display catalogCardTopRated textView
+            boolean catalogCardTopRated = false;
+
+            if (item.getString("topRatedListing").equals("true")) {
+                catalogCardTopRated = true;
+            }
+
+            catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle, catalogCardShipping, catalogCardTopRated));
         }
 
         return catalogCardArrayList;

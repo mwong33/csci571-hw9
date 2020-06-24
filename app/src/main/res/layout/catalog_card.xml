@@ -34,7 +34,7 @@
         <TextView
             android:id="@+id/catalogCardShipping"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="26dp"
             android:layout_below="@id/catalogCardTitle"
             android:text="Catalog Card Shipping"
             android:textSize="12dp"
@@ -48,7 +48,8 @@
             android:text="Top Rated Listing"
             android:textStyle="bold"
             android:textSize="10dp"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            android:visibility="gone"/>
 
 <!--        <TextView-->
 <!--            android:id="@+id/catalogCardCondition"-->

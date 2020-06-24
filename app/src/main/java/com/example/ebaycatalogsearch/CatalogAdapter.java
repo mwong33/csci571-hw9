@@ -23,12 +23,14 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         public ImageView catalogCardImage;
         public TextView catalogCardTitle;
         public TextView catalogCardShipping;
+        public TextView catalogCardTopRated;
 
         public CatalogViewHolder(@NonNull View itemView) {
             super(itemView);
             catalogCardImage = itemView.findViewById(R.id.catalogCardImage);
             catalogCardTitle = itemView.findViewById(R.id.catalogCardTitle);
             catalogCardShipping = itemView.findViewById(R.id.catalogCardShipping);
+            catalogCardTopRated = itemView.findViewById(R.id.catalogCardTopRated);
         }
     }
 
@@ -62,6 +64,11 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
 
         // Setting the Catalog Card Shipping Details
         holder.catalogCardShipping.setText(Html.fromHtml(currentCatalogCard.getCatalogCardShipping()));
+
+        // Set the Catalog Card Top Rated text if it is true
+        if (currentCatalogCard.catalogCardTopRated()) {
+            holder.catalogCardTopRated.setVisibility(View.VISIBLE);
+        }
 
     }
 
