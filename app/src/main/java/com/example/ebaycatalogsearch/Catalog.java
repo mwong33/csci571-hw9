@@ -135,6 +135,8 @@ public class Catalog extends AppCompatActivity {
                             catalogAdapter = new CatalogAdapter(catalogCardArrayList);
                             recyclerView.setLayoutManager(gridLayoutManager);
                             recyclerView.setAdapter(catalogAdapter);
+                            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
 
                             // Display the scrollView
                             scrollView.setVisibility(View.VISIBLE);
