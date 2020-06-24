@@ -52,7 +52,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         Picasso.with(holder.catalogCardImage.getContext()).load(catalogCardImageUrl).into(holder.catalogCardImage);
 
         // Setting the Catalog Card Title
-        String catalogCardTitleHTML = "<p>" + currentCatalogCard.getCatalogCardTitle() + "</p>";
+        String catalogCardTitleHTML = "<p style=\"color:black\">" + currentCatalogCard.getCatalogCardTitle() + "</p>";
 
         holder.catalogCardTitle.setText(Html.fromHtml(catalogCardTitleHTML));
 
