@@ -1,6 +1,9 @@
 package com.example.ebaycatalogsearch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,6 +15,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +29,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Catalog extends AppCompatActivity {
 
@@ -48,6 +55,12 @@ public class Catalog extends AppCompatActivity {
     // Catalog elements
     private TextView itemCountDisplay;
 
+    // These Views
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter catalogAdapter;
+    private GridLayoutManager gridLayoutManager;
+    private ScrollView scrollView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +80,9 @@ public class Catalog extends AppCompatActivity {
 
         // Initialize the Catalog elements
         itemCountDisplay = findViewById(R.id.itemCountDisplay);
+
+        // Initialize these views
+        scrollView = findViewById(R.id.scrollView);
 
         // Initialize the requestQueue
         requestQueue = Volley.newRequestQueue(this);
@@ -103,6 +119,25 @@ public class Catalog extends AppCompatActivity {
                         } else {
                             // Display the item count display
                             createItemCountDisplay();
+
+                            // Create an array of the CatalogCard objects
+                            ArrayList<CatalogCard> catalogCardArrayList = new ArrayList<>();
+                            try {
+                                catalogCardArrayList = createCatalogCardArrayList(responseItemsArray);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            // Setup the Grid View
+                            recyclerView = findViewById(R.id.recyclerView);
+                            recyclerView.setHasFixedSize(true);
+                            gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+                            catalogAdapter = new CatalogAdapter(catalogCardArrayList);
+                            recyclerView.setLayoutManager(gridLayoutManager);
+                            recyclerView.setAdapter(catalogAdapter);
+
+                            // Display the scrollView
+                            scrollView.setVisibility(View.VISIBLE);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -123,6 +158,22 @@ public class Catalog extends AppCompatActivity {
         itemCountDisplay.setText(Html.fromHtml(htmlItemCountDisplayString));
 
         itemCountDisplay.setVisibility(View.VISIBLE);
+    }
+
+    private ArrayList<CatalogCard> createCatalogCardArrayList(JSONArray responseItemsArray) throws JSONException {
+        ArrayList<CatalogCard> catalogCardArrayList = new ArrayList<>();
+
+        // Make sure we limit to 50 results
+        for (int i = 0; (i < responseItemsArray.length()) && (i < 50); i++) {
+
+            JSONObject item = responseItemsArray.getJSONObject(i);
+
+            String catalogCardTitle = item.getString("title");
+
+            catalogCardArrayList.add(new CatalogCard(catalogCardTitle));
+        }
+
+        return catalogCardArrayList;
     }
 
 }

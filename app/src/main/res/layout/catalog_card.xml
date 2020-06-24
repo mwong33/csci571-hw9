@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="4dp">
+
+<!--        <ImageView-->
+<!--            android:id="@+id/catalogCardImage"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp" />-->
+
+        <TextView
+            android:id="@+id/catalogCardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Catalog Card Title" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/catalogCardShipping"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Catalog Card Shipping" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/catalogCardTopRated"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Catalog Card Shipping" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/catalogCardCondition"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Catalog Card Shipping" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/catalogCardPrice"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Catalog Card Shipping" />-->
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

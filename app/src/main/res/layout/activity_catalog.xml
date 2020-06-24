@@ -48,13 +48,13 @@
             android:layout_marginTop="8dp"
             android:text="Showing ??? results for ???"
             android:textStyle="bold"
-            android:visibility="visible"  />
+            android:visibility="gone"  />
 
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
