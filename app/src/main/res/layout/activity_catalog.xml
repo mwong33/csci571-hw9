@@ -49,7 +49,7 @@
             <TextView
                 android:id="@+id/itemCountDisplay"
                 android:layout_width="match_parent"
-                android:layout_height="18dp"
+                android:layout_height="26dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:text="Showing ??? results for ???"
