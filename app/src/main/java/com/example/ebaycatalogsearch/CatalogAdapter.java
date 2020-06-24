@@ -49,7 +49,9 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         // Setting the Catalog Card Image
         String catalogCardImageUrl = currentCatalogCard.getCatalogCardImageUrl();
 
-        Picasso.with(holder.catalogCardImage.getContext()).load(catalogCardImageUrl).into(holder.catalogCardImage);
+        if (!catalogCardImageUrl.equals("https://csci571.com/hw/hw8/images/ebayDefault.png")) {
+            Picasso.with(holder.catalogCardImage.getContext()).load(catalogCardImageUrl).into(holder.catalogCardImage);
+        }
 
         // Setting the Catalog Card Title
         String catalogCardTitleHTML = "<p style=\"color:black\">" + currentCatalogCard.getCatalogCardTitle() + "</p>";

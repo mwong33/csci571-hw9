@@ -14,8 +14,9 @@
         <ImageView
             android:id="@+id/catalogCardImage"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="fitCenter"/>
+            android:layout_height="175dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ebay_default"/>
 
         <TextView
             android:id="@+id/catalogCardTitle"
