@@ -22,11 +22,13 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
 
         public ImageView catalogCardImage;
         public TextView catalogCardTitle;
+        public TextView catalogCardShipping;
 
         public CatalogViewHolder(@NonNull View itemView) {
             super(itemView);
             catalogCardImage = itemView.findViewById(R.id.catalogCardImage);
             catalogCardTitle = itemView.findViewById(R.id.catalogCardTitle);
+            catalogCardShipping = itemView.findViewById(R.id.catalogCardShipping);
         }
     }
 
@@ -57,6 +59,9 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         String catalogCardTitleHTML = "<p style=\"color:black\">" + currentCatalogCard.getCatalogCardTitle() + "</p>";
 
         holder.catalogCardTitle.setText(Html.fromHtml(catalogCardTitleHTML));
+
+        // Setting the Catalog Card Shipping Details
+        holder.catalogCardShipping.setText(currentCatalogCard.getCatalogCardShipping());
 
     }
 

@@ -168,10 +168,24 @@ public class Catalog extends AppCompatActivity {
 
             JSONObject item = responseItemsArray.getJSONObject(i);
 
+            // Get the Catalog Card Image URL
             String catalogCardImageUrl = item.getString("galleryURL");
+
+            // Get the Catalog Card Title
             String catalogCardTitle = item.getString("title");
 
-            catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle));
+            // Get the Catalog Card Shipping Price. If it is 0.0, string will be "FREE Shipping"
+            String shippingCost = item.getString("shippingCost");
+
+            String catalogCardShipping = "";
+
+            if (shippingCost.equals("0.0")) {
+                catalogCardShipping = "FREE Shipping";
+            } else {
+                catalogCardShipping = "Ships for $" + shippingCost;
+            }
+
+            catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle, catalogCardShipping));
         }
 
         return catalogCardArrayList;
