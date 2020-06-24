@@ -34,38 +34,38 @@
         android:visibility="gone" />
 
     <!--Items View-->
-    <LinearLayout
-        android:id="@+id/itemsLayout"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
-        <TextView
-            android:id="@+id/itemCountDisplay"
+        <LinearLayout
+            android:id="@+id/itemsLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:text="Showing ??? results for ???"
-            android:textStyle="bold"
-            android:visibility="gone"  />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
+            <TextView
+                android:id="@+id/itemCountDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Showing ??? results for ???"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dp">
+                android:padding="10dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
-        </ScrollView>
+        </LinearLayout>
 
-    </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

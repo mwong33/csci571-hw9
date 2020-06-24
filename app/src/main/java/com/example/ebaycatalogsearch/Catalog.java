@@ -156,8 +156,6 @@ public class Catalog extends AppCompatActivity {
                 + "<span style=\"color:#0063D1\">" + requestKeywords + "</span></p>";
 
         itemCountDisplay.setText(Html.fromHtml(htmlItemCountDisplayString));
-
-        itemCountDisplay.setVisibility(View.VISIBLE);
     }
 
     private ArrayList<CatalogCard> createCatalogCardArrayList(JSONArray responseItemsArray) throws JSONException {
