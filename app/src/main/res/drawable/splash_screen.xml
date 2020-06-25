@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <item android:drawable="@color/ic_launcher_background"/>
-    <item>
+    <item android:drawable="@color/ic_launcher_background" />
 
-        <bitmap
-            android:src="@drawable/app_logo"
-            android:gravity="center"/>
-    </item>
+    <item
+        android:width="70dp"
+        android:height="70dp"
+        android:drawable="@drawable/ic_shopping_cart_black_24dp"
+        android:gravity="center" />
+
 </layer-list>
