@@ -9,8 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,11 +49,11 @@ public class Catalog extends AppCompatActivity {
     // Catalog elements
     private TextView itemCountDisplay;
 
-    // These Views
+    // Views and Layouts
     private RecyclerView recyclerView;
     private RecyclerView.Adapter catalogAdapter;
     private GridLayoutManager gridLayoutManager;
-    private ScrollView scrollView;
+    private LinearLayout itemsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public class Catalog extends AppCompatActivity {
         itemCountDisplay = findViewById(R.id.itemCountDisplay);
 
         // Initialize these views
-        scrollView = findViewById(R.id.scrollView);
+        itemsLayout = findViewById(R.id.itemsLayout);
 
         // Initialize the requestQueue
         requestQueue = Volley.newRequestQueue(this);
@@ -133,7 +133,7 @@ public class Catalog extends AppCompatActivity {
                             recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
 
                             // Display the scrollView
-                            scrollView.setVisibility(View.VISIBLE);
+                            itemsLayout.setVisibility(View.VISIBLE);
                         }
                     }
                 }, new Response.ErrorListener() {
