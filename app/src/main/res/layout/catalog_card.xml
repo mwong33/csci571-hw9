@@ -51,14 +51,16 @@
 
         <TextView
             android:id="@+id/catalogCardCondition"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Catalog Card Shipping"
             android:textSize="11dp"
             android:layout_alignParentBottom="true"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingBottom="1dp"/>
+            android:paddingBottom="1dp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/catalogCardPrice"
@@ -69,7 +71,8 @@
             android:layout_alignParentRight="true"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingBottom="1dp"/>
+            android:paddingBottom="1dp"
+            android:maxLines="1"/>
 
     </RelativeLayout>
 
