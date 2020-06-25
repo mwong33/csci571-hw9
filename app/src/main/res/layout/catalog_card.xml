@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="314dp"
+        android:layout_height="312dp"
         android:layout_margin="4dp">
 
         <ImageView
@@ -28,7 +28,6 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:padding="5dp"
-            android:textStyle="bold"
             android:textAllCaps="true"/>
 
         <TextView
@@ -46,16 +45,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/catalogCardShipping"
             android:text="Top Rated Listing"
-            android:textStyle="bold"
             android:textSize="10dp"
             android:padding="5dp"
             android:visibility="gone"/>
 
-<!--        <TextView-->
-<!--            android:id="@+id/catalogCardCondition"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Catalog Card Shipping" />-->
+        <TextView
+            android:id="@+id/catalogCardCondition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Catalog Card Shipping"
+            android:textSize="11dp"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="1dp"/>
 
 <!--        <TextView-->
 <!--            android:id="@+id/catalogCardPrice"-->

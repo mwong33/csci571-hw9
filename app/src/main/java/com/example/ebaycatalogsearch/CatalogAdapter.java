@@ -24,6 +24,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         public TextView catalogCardTitle;
         public TextView catalogCardShipping;
         public TextView catalogCardTopRated;
+        private TextView catalogCardCondition;
 
         public CatalogViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -31,6 +32,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
             catalogCardTitle = itemView.findViewById(R.id.catalogCardTitle);
             catalogCardShipping = itemView.findViewById(R.id.catalogCardShipping);
             catalogCardTopRated = itemView.findViewById(R.id.catalogCardTopRated);
+            catalogCardCondition = itemView.findViewById(R.id.catalogCardCondition);
         }
     }
 
@@ -58,7 +60,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         }
 
         // Setting the Catalog Card Title
-        String catalogCardTitleHTML = "<p style=\"color:black\">" + currentCatalogCard.getCatalogCardTitle() + "</p>";
+        String catalogCardTitleHTML = "<p style=\"color:black\"><b>" + currentCatalogCard.getCatalogCardTitle() + "</b></p>";
 
         holder.catalogCardTitle.setText(Html.fromHtml(catalogCardTitleHTML));
 
@@ -67,8 +69,14 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
 
         // Set the Catalog Card Top Rated text if it is true
         if (currentCatalogCard.catalogCardTopRated()) {
+            holder.catalogCardTopRated.setText(Html.fromHtml("<b>Top Rated Listing</b>"));
             holder.catalogCardTopRated.setVisibility(View.VISIBLE);
         }
+
+        // Set the Catalog Card Condition
+        String catalogCardConditionHTML = "<b><i>" + currentCatalogCard.catalogCardCondition() + "</i></b>";
+
+        holder.catalogCardCondition.setText(Html.fromHtml(catalogCardConditionHTML));
 
     }
 

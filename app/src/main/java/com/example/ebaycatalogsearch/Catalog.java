@@ -192,7 +192,11 @@ public class Catalog extends AppCompatActivity {
                 catalogCardTopRated = true;
             }
 
-            catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle, catalogCardShipping, catalogCardTopRated));
+            // Get the Catalog Card Condition
+            String catalogCardCondition = item.getString("condition");
+
+            catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle,
+                    catalogCardShipping, catalogCardTopRated, catalogCardCondition));
         }
 
         return catalogCardArrayList;
