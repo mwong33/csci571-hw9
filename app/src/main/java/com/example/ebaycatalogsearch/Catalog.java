@@ -195,8 +195,11 @@ public class Catalog extends AppCompatActivity {
             // Get the Catalog Card Condition
             String catalogCardCondition = item.getString("condition");
 
+            // Get the Catalog Card Price
+            String catalogCardPrice = item.getString("sellingPrice");
+
             catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle,
-                    catalogCardShipping, catalogCardTopRated, catalogCardCondition));
+                    catalogCardShipping, catalogCardTopRated, catalogCardCondition, catalogCardPrice));
         }
 
         return catalogCardArrayList;

@@ -1,6 +1,5 @@
 package com.example.ebaycatalogsearch;
 import android.text.Html;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         public TextView catalogCardShipping;
         public TextView catalogCardTopRated;
         private TextView catalogCardCondition;
+        private TextView catalogCardPrice;
 
         public CatalogViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -33,6 +33,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
             catalogCardShipping = itemView.findViewById(R.id.catalogCardShipping);
             catalogCardTopRated = itemView.findViewById(R.id.catalogCardTopRated);
             catalogCardCondition = itemView.findViewById(R.id.catalogCardCondition);
+            catalogCardPrice = itemView.findViewById(R.id.catalogCardPrice);
         }
     }
 
@@ -68,16 +69,20 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         holder.catalogCardShipping.setText(Html.fromHtml(currentCatalogCard.getCatalogCardShipping()));
 
         // Set the Catalog Card Top Rated text if it is true
-        if (currentCatalogCard.catalogCardTopRated()) {
+        if (currentCatalogCard.getCatalogCardTopRated()) {
             holder.catalogCardTopRated.setText(Html.fromHtml("<b>Top Rated Listing</b>"));
             holder.catalogCardTopRated.setVisibility(View.VISIBLE);
         }
 
         // Set the Catalog Card Condition
-        String catalogCardConditionHTML = "<b><i>" + currentCatalogCard.catalogCardCondition() + "</i></b>";
+        String catalogCardConditionHTML = "<b><i>" + currentCatalogCard.getCatalogCardCondition() + "</i></b>";
 
         holder.catalogCardCondition.setText(Html.fromHtml(catalogCardConditionHTML));
 
+        // Set the Catalog Card Price
+        String catalogCardConditionPrice = "<p style=\"color:#AEBD74\"><b>$" + currentCatalogCard.getCatalogCardPrice() + "</b></p>";
+
+        holder.catalogCardPrice.setText(Html.fromHtml(catalogCardConditionPrice));
     }
 
     @Override
