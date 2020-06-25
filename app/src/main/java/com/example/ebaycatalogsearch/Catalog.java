@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +39,9 @@ public class Catalog extends AppCompatActivity {
 
     // Request Object
     private RequestQueue requestQueue;
+
+    // Swipe Refresh Layout
+    private SwipeRefreshLayout swipeRefreshItems;
 
     // Loading Bar elements
     private ProgressBar catalogProgressBar;
@@ -78,6 +82,17 @@ public class Catalog extends AppCompatActivity {
 
         // Initialize the requestQueue
         requestQueue = Volley.newRequestQueue(this);
+
+        // Initialize the swipeRefreshItems
+        swipeRefreshItems = findViewById(R.id.swipeRefreshItems);
+
+        // Create the onRefresh method for swipeRefreshItems
+        swipeRefreshItems.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshItems();
+            }
+        });
 
         // Execute the HTTP Request
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, requestUrl, null,
@@ -143,6 +158,79 @@ public class Catalog extends AppCompatActivity {
         });
         requestQueue.add(request);
 
+    }
+
+    private void refreshItems() {
+        // Execute the HTTP Request
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, requestUrl, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        // Remove the loading bar once response is complete
+                        catalogProgressBar.setVisibility(View.GONE);
+                        catalogProgressText.setVisibility(View.GONE);
+
+                        // Acquire the data
+                        responseJSON = response;
+                        try {
+                            responseItemsArray = responseJSON.getJSONArray("items");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            itemCount = Integer.parseInt(responseJSON.getString("itemCount"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (itemCount == 0) {
+                            // Display the No Records message and No Records Toast
+                            noRecords.setVisibility(View.VISIBLE);
+                            Toast.makeText(Catalog.this, "No Records",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Create an array of the CatalogCard objects
+                            ArrayList<CatalogCard> catalogCardArrayList = new ArrayList<>();
+                            try {
+                                catalogCardArrayList = createCatalogCardArrayList(responseItemsArray);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            // Display the item count display
+                            createItemCountDisplay(catalogCardArrayList.size());
+
+                            // Setup the Grid View
+                            recyclerView = findViewById(R.id.recyclerView);
+                            recyclerView.setHasFixedSize(true);
+                            gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+                            catalogAdapter = new CatalogAdapter(catalogCardArrayList);
+                            recyclerView.setLayoutManager(gridLayoutManager);
+                            recyclerView.setAdapter(catalogAdapter);
+                            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
+
+                            // Display the scrollView
+                            itemCountDisplay.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                        }
+
+                        if(swipeRefreshItems.isRefreshing()) {
+                            swipeRefreshItems.setRefreshing(false);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                if(swipeRefreshItems.isRefreshing()) {
+                    swipeRefreshItems.setRefreshing(false);
+                }
+            }
+        });
+        requestQueue.add(request);
     }
 
     private void createItemCountDisplay(int catalogCardCount) {
