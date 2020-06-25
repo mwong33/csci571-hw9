@@ -293,8 +293,14 @@ public class Catalog extends AppCompatActivity implements CatalogAdapter.OnCatal
     @Override
     public void onCatalogCardClick(int position) {
         Intent intent = new Intent(this, SingleItem.class);
+
+        // Pass the Item Title and Product ID
         String catalogCardProductID = catalogCardArrayList.get(position).getCatalogCardProductID();
         intent.putExtra("productID", catalogCardProductID);
+
+        String catalogCardTitle = catalogCardArrayList.get(position).getCatalogCardTitle();
+        intent.putExtra("title", catalogCardTitle);
+
         startActivity(intent);
     }
 }

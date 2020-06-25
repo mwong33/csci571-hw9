@@ -17,7 +17,6 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // Constants
-    public static final String RESPONSE_STRING = "com.example.ebaycatalogsearch.RESPONSE_STRING";
     public static final String REQUEST_URL = "com.example.ebaycatalogsearch.REQUEST_URL";
     public static final String REQUEST_KEYWORDS = "com.example.ebaycatalogsearch.REQUEST_KEYWORDS";
 
