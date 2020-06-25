@@ -24,27 +24,25 @@
         android:text="Searching Products..."
         android:visibility="visible" />
 
-    <!--No Records View-->
     <TextView
         android:id="@+id/noRecords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="No Records"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
-    <!--Items View-->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--Items View-->
         <LinearLayout
             android:id="@+id/itemsLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/itemCountDisplay"
@@ -53,13 +51,15 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:text="Showing ??? results for ???"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="0dp">
+                android:padding="0dp"
+                android:visibility="gone">
 
             </androidx.recyclerview.widget.RecyclerView>
 

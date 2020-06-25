@@ -46,14 +46,11 @@ public class Catalog extends AppCompatActivity {
     // No Records element
     private TextView noRecords;
 
-    // Catalog elements
+    // Items Elements
     private TextView itemCountDisplay;
-
-    // Views and Layouts
     private RecyclerView recyclerView;
     private RecyclerView.Adapter catalogAdapter;
     private GridLayoutManager gridLayoutManager;
-    private LinearLayout itemsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +72,9 @@ public class Catalog extends AppCompatActivity {
         // Initialize the Catalog elements
         itemCountDisplay = findViewById(R.id.itemCountDisplay);
 
-        // Initialize these views
-        itemsLayout = findViewById(R.id.itemsLayout);
+        // Initialize Items Elements
+        itemCountDisplay = findViewById(R.id.itemCountDisplay);
+        recyclerView = findViewById(R.id.recyclerView);
 
         // Initialize the requestQueue
         requestQueue = Volley.newRequestQueue(this);
@@ -133,7 +131,8 @@ public class Catalog extends AppCompatActivity {
                             recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
 
                             // Display the scrollView
-                            itemsLayout.setVisibility(View.VISIBLE);
+                            itemCountDisplay.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.VISIBLE);
                         }
                     }
                 }, new Response.ErrorListener() {
