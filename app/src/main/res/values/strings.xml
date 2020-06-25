@@ -20,4 +20,7 @@
     <string name="clearButtonText">Clear</string>
     <string name="keywordsWarning">Please enter mandatory field</string>
     <string name="priceRangeWarning">Please enter valid price values</string>
+    <string name="title_activity_single_item">SingleItem</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

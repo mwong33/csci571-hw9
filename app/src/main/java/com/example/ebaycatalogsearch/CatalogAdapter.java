@@ -16,8 +16,9 @@ import java.util.ArrayList;
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
 
     private ArrayList<CatalogCard> catalogCardArrayList;
+    private OnCatalogCardListener mOnCatalogCardListener;
 
-    public static class CatalogViewHolder extends RecyclerView.ViewHolder {
+    public static class CatalogViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView catalogCardImage;
         public TextView catalogCardTitle;
@@ -25,8 +26,9 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         public TextView catalogCardTopRated;
         private TextView catalogCardCondition;
         private TextView catalogCardPrice;
+        private OnCatalogCardListener onCatalogCardListener;
 
-        public CatalogViewHolder(@NonNull View itemView) {
+        public CatalogViewHolder(@NonNull View itemView, OnCatalogCardListener onCatalogCardListener) {
             super(itemView);
             catalogCardImage = itemView.findViewById(R.id.catalogCardImage);
             catalogCardTitle = itemView.findViewById(R.id.catalogCardTitle);
@@ -34,18 +36,27 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
             catalogCardTopRated = itemView.findViewById(R.id.catalogCardTopRated);
             catalogCardCondition = itemView.findViewById(R.id.catalogCardCondition);
             catalogCardPrice = itemView.findViewById(R.id.catalogCardPrice);
+
+            this.onCatalogCardListener = onCatalogCardListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            onCatalogCardListener.onCatalogCardClick(getAdapterPosition());
         }
     }
 
-    public CatalogAdapter(ArrayList<CatalogCard> catalogCardArrayList) {
+    public CatalogAdapter(ArrayList<CatalogCard> catalogCardArrayList, OnCatalogCardListener mOnCatalogCardListener) {
         this.catalogCardArrayList = catalogCardArrayList;
+        this.mOnCatalogCardListener = mOnCatalogCardListener;
     }
 
     @NonNull
     @Override
     public CatalogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.catalog_card, parent, false);
-        CatalogViewHolder evh = new CatalogViewHolder(v);
+        CatalogViewHolder evh = new CatalogViewHolder(v, mOnCatalogCardListener);
         return evh;
     }
 
@@ -88,5 +99,9 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
     @Override
     public int getItemCount() {
         return catalogCardArrayList.size();
+    }
+
+    public interface OnCatalogCardListener {
+        void onCatalogCardClick(int position);
     }
 }

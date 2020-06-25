@@ -8,15 +8,18 @@ public class CatalogCard {
     private boolean catalogCardTopRated;
     private String catalogCardCondition;
     private String catalogCardPrice;
+    private String catalogCardProductID;
 
     public CatalogCard(String catalogCardImageUrl, String catalogCardTitle, String catalogCardShipping,
-                       boolean catalogCardTopRated, String catalogCardCondition, String catalogCardPrice) {
+                       boolean catalogCardTopRated, String catalogCardCondition, String catalogCardPrice,
+                       String catalogCardProductID) {
         this.catalogCardImageUrl = catalogCardImageUrl;
         this.catalogCardTitle = catalogCardTitle;
         this.catalogCardShipping = catalogCardShipping;
         this.catalogCardTopRated = catalogCardTopRated;
         this.catalogCardCondition = catalogCardCondition;
         this.catalogCardPrice = catalogCardPrice;
+        this.catalogCardProductID = catalogCardProductID;
     }
 
     public String getCatalogCardImageUrl() {
@@ -41,6 +44,10 @@ public class CatalogCard {
 
     public String getCatalogCardPrice() {
         return catalogCardPrice;
+    }
+
+    public String getCatalogCardProductID() {
+        return catalogCardProductID;
     }
 
 }

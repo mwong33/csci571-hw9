@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Catalog extends AppCompatActivity {
+public class Catalog extends AppCompatActivity implements CatalogAdapter.OnCatalogCardListener {
 
     // Response and Request Data
     private String requestUrl;
@@ -55,6 +55,9 @@ public class Catalog extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter catalogAdapter;
     private GridLayoutManager gridLayoutManager;
+
+    // Catalog Card Array
+    private ArrayList<CatalogCard> catalogCardArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,9 @@ public class Catalog extends AppCompatActivity {
             }
         });
 
+        // Initialize the Catalog Card Array List
+        catalogCardArrayList = new ArrayList<>();
+
         // Execute the HTTP Request
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, requestUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -125,7 +131,6 @@ public class Catalog extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Create an array of the CatalogCard objects
-                            ArrayList<CatalogCard> catalogCardArrayList = new ArrayList<>();
                             try {
                                 catalogCardArrayList = createCatalogCardArrayList(responseItemsArray);
                             } catch (JSONException e) {
@@ -136,14 +141,7 @@ public class Catalog extends AppCompatActivity {
                             createItemCountDisplay(catalogCardArrayList.size());
 
                             // Setup the Grid View
-                            recyclerView = findViewById(R.id.recyclerView);
-                            recyclerView.setHasFixedSize(true);
-                            gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
-                            catalogAdapter = new CatalogAdapter(catalogCardArrayList);
-                            recyclerView.setLayoutManager(gridLayoutManager);
-                            recyclerView.setAdapter(catalogAdapter);
-                            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-                            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
+                            setupGridView();
 
                             // Display the scrollView
                             itemCountDisplay.setVisibility(View.VISIBLE);
@@ -192,7 +190,6 @@ public class Catalog extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Create an array of the CatalogCard objects
-                            ArrayList<CatalogCard> catalogCardArrayList = new ArrayList<>();
                             try {
                                 catalogCardArrayList = createCatalogCardArrayList(responseItemsArray);
                             } catch (JSONException e) {
@@ -203,14 +200,7 @@ public class Catalog extends AppCompatActivity {
                             createItemCountDisplay(catalogCardArrayList.size());
 
                             // Setup the Grid View
-                            recyclerView = findViewById(R.id.recyclerView);
-                            recyclerView.setHasFixedSize(true);
-                            gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
-                            catalogAdapter = new CatalogAdapter(catalogCardArrayList);
-                            recyclerView.setLayoutManager(gridLayoutManager);
-                            recyclerView.setAdapter(catalogAdapter);
-                            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-                            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
+                            setupGridView();
 
                             // Display the scrollView
                             itemCountDisplay.setVisibility(View.VISIBLE);
@@ -231,6 +221,16 @@ public class Catalog extends AppCompatActivity {
             }
         });
         requestQueue.add(request);
+    }
+
+    private void setupGridView() {
+        recyclerView.setHasFixedSize(true);
+        gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+        catalogAdapter = new CatalogAdapter(catalogCardArrayList, this);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(catalogAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.HORIZONTAL));
     }
 
     private void createItemCountDisplay(int catalogCardCount) {
@@ -279,11 +279,22 @@ public class Catalog extends AppCompatActivity {
             // Get the Catalog Card Price
             String catalogCardPrice = item.getString("sellingPrice");
 
+            // Get the Catalog Card Product ID
+            String catalogCardProductID = item.getString("productID");
+
             catalogCardArrayList.add(new CatalogCard(catalogCardImageUrl, catalogCardTitle,
-                    catalogCardShipping, catalogCardTopRated, catalogCardCondition, catalogCardPrice));
+                    catalogCardShipping, catalogCardTopRated, catalogCardCondition, catalogCardPrice,
+                    catalogCardProductID));
         }
 
         return catalogCardArrayList;
     }
 
+    @Override
+    public void onCatalogCardClick(int position) {
+        Intent intent = new Intent(this, SingleItem.class);
+        String catalogCardProductID = catalogCardArrayList.get(position).getCatalogCardProductID();
+        intent.putExtra("productID", catalogCardProductID);
+        startActivity(intent);
+    }
 }

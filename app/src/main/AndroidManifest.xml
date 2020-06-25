@@ -11,14 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Catalog"
-            android:parentActivityName=".MainActivity"
-            android:label="Search Results"
+        <activity android:name=".SingleItem"
+            android:parentActivityName=".Catalog"
             android:launchMode="singleTask"></activity>
         <activity
+            android:name=".Catalog"
+            android:label="Search Results"
+            android:launchMode="singleTask"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.Launcher"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
