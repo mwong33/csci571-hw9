@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             app:tabBackground="@drawable/tab_selector"
             app:tabTextColor="@color/ic_launcher_background"
-            app:tabSelectedTextColor="@color/ic_launcher_background"/>
+            app:tabSelectedTextColor="@color/ic_launcher_background"
+            app:tabRippleColor="@color/selectedGrey"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
