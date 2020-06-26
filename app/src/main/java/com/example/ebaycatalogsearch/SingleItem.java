@@ -1,6 +1,7 @@
 package com.example.ebaycatalogsearch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +26,10 @@ public class SingleItem extends AppCompatActivity {
 
     // Request Object
     private RequestQueue requestQueue;
+
+    // Classes for Tabular View
+    private SectionsPageAdapter sectionsPageadapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,21 @@ public class SingleItem extends AppCompatActivity {
         // Make the getSingleItem request
         getSingleItem();
 
+        // Tab View Creation
+        sectionsPageadapter = new SectionsPageAdapter(getSupportFragmentManager());
+        viewPager = findViewById(R.id.container);
+        setupViewPager(viewPager);
+
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ProductFragment(), "Product");
+        adapter.addFragment(new SellerInfoFragment(), "Seller Info");
+        adapter.addFragment(new ShippingFragment(), "Shipping");
+        viewPager.setAdapter(adapter);
     }
 
     private void getSingleItem() {
