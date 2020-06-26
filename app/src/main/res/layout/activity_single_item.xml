@@ -17,7 +17,10 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabTextColor="@color/ic_launcher_background"
+            app:tabSelectedTextColor="@color/ic_launcher_background"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
