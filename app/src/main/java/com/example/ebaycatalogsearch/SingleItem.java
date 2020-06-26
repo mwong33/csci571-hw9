@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class SingleItem extends AppCompatActivity {
     private TabLayout tabLayout;
     private int[] tabIconArray = {
             R.drawable.information_variant_selector,
+            R.drawable.ic_seller,
             R.drawable.truck_delivery_selector
     };
 
@@ -75,7 +77,8 @@ public class SingleItem extends AppCompatActivity {
 
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIconArray[0]);
-        tabLayout.getTabAt(2).setIcon(tabIconArray[1]);
+        tabLayout.getTabAt(1).setIcon(tabIconArray[1]);
+        tabLayout.getTabAt(2).setIcon(tabIconArray[2]);
     }
 
     private void getSingleItem() {
