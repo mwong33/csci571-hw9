@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -88,7 +91,11 @@ public class SingleItem extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
 
-
+                        // Remove the Progress Bar
+                        ProgressBar singleItemProgressBar = findViewById(R.id.singleItemProgressBar);
+                        singleItemProgressBar.setVisibility(View.GONE);
+                        TextView singleItemProgressText = findViewById(R.id.singleItemProgressText);
+                        singleItemProgressText.setVisibility(View.GONE);
 
                     }
                 }, new Response.ErrorListener() {
