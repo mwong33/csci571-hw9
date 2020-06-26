@@ -60,7 +60,7 @@ public class SingleItem extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        SectionsPageAdapter adapter = sectionsPageadapter;
         adapter.addFragment(new ProductFragment(), "Product");
         adapter.addFragment(new SellerInfoFragment(), "Seller Info");
         adapter.addFragment(new ShippingFragment(), "Shipping");
