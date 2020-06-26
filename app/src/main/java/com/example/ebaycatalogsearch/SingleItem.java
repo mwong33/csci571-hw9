@@ -30,6 +30,11 @@ public class SingleItem extends AppCompatActivity {
     // Classes for Tabular View
     private SectionsPageAdapter sectionsPageadapter;
     private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private int[] tabIconArray = {
+            R.drawable.information_variant_selector,
+            R.drawable.truck_delivery_selector
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +60,9 @@ public class SingleItem extends AppCompatActivity {
         viewPager = findViewById(R.id.container);
         setupViewPager(viewPager);
 
-        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        setupTabIcons();
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -65,6 +71,11 @@ public class SingleItem extends AppCompatActivity {
         adapter.addFragment(new SellerInfoFragment(), "Seller Info");
         adapter.addFragment(new ShippingFragment(), "Shipping");
         viewPager.setAdapter(adapter);
+    }
+
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIconArray[0]);
+        tabLayout.getTabAt(2).setIcon(tabIconArray[1]);
     }
 
     private void getSingleItem() {
