@@ -291,15 +291,19 @@ public class Catalog extends AppCompatActivity implements CatalogAdapter.OnCatal
     }
 
     @Override
-    public void onCatalogCardClick(int position) {
+    public void onCatalogCardClick(int position) throws JSONException {
         Intent intent = new Intent(this, SingleItem.class);
 
-        // Pass the Item Title and Product ID
+        // Pass the Item Title and Product ID and the entire JSON Response (allItemsString)
         String catalogCardProductID = catalogCardArrayList.get(position).getCatalogCardProductID();
         intent.putExtra("productID", catalogCardProductID);
 
         String catalogCardTitle = catalogCardArrayList.get(position).getCatalogCardTitle();
         intent.putExtra("title", catalogCardTitle);
+
+        JSONObject item = responseItemsArray.getJSONObject(position);
+        String itemAdvancedString = item.toString();
+        intent.putExtra("itemAdvancedString", itemAdvancedString);
 
         startActivity(intent);
     }

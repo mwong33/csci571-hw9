@@ -27,6 +27,9 @@ public class SingleItem extends AppCompatActivity {
     private String productID;
     private String title;
 
+    // itemAdvancedString
+    private String itemAdvancedString;
+
     // Request Object
     private RequestQueue requestQueue;
 
@@ -65,6 +68,9 @@ public class SingleItem extends AppCompatActivity {
         productFragment = new ProductFragment();
         sellerInfoFragment = new SellerInfoFragment();
         shippingFragment = new ShippingFragment();
+
+        // Initialize the itemAdvancedString
+        itemAdvancedString = intent.getStringExtra("itemAdvancedString");
 
         // Tab View Creation
         sectionsPageadapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -117,9 +123,12 @@ public class SingleItem extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        // Pass the item JSONObject to the fragments
+                        // Pass the item JSONObject to the fragments as a String
                         Bundle itemBundle = new Bundle();
                         itemBundle.putString("itemString", item.toString());
+
+                        // Pass the itemAdvancedString
+                        itemBundle.putString("itemAdvancedString", itemAdvancedString);
 
                         productFragment.setArguments(itemBundle);
                         sellerInfoFragment.setArguments(itemBundle);

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
@@ -43,7 +45,11 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
 
         @Override
         public void onClick(View view) {
-            onCatalogCardListener.onCatalogCardClick(getAdapterPosition());
+            try {
+                onCatalogCardListener.onCatalogCardClick(getAdapterPosition());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -102,6 +108,6 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
     }
 
     public interface OnCatalogCardListener {
-        void onCatalogCardClick(int position);
+        void onCatalogCardClick(int position) throws JSONException;
     }
 }

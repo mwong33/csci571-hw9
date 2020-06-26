@@ -16,6 +16,7 @@ import org.json.JSONObject;
 public class ProductFragment extends Fragment {
 
     private String itemString;
+    private String itemAdvancedString;
 
     @Nullable
     @Override
@@ -28,6 +29,7 @@ public class ProductFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Initialize the itemString from the itemString passed by SingleItem activity
         itemString = getArguments().getString("itemString");
+        itemAdvancedString = getArguments().getString("itemAdvancedString");
 
         TextView textView = getView().findViewById(R.id.textView);
         textView.setText(itemString);

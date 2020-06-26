@@ -11,9 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ShippingFragment extends Fragment {
 
     private String itemString;
+    private String itemAdvancedString;
 
     @Nullable
     @Override
@@ -26,6 +30,19 @@ public class ShippingFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Initialize the itemString from the itemString passed by SingleItem activity
         itemString = getArguments().getString("itemString");
+        itemAdvancedString = getArguments().getString("itemAdvancedString");
+        try {
+            createShippingInformation();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void createShippingInformation() throws JSONException {
+        // Create the JSONObject
+        JSONObject item = new JSONObject(itemString);
+        JSONObject itemAdvanced = new JSONObject(itemAdvancedString);
 
         // Set the shippingInformationTitle
         String shippingInformationTitleHTML = "<p style=\"color:black\"><b>Shipping Information</b></p>";
@@ -33,14 +50,23 @@ public class ShippingFragment extends Fragment {
         shippingInformationTitle.setText(Html.fromHtml(shippingInformationTitleHTML));
 
         // Set the shippingBulletList
-        String shippingBulletListHTML = "<ul>\n" +
-                "  <li><b>Handling  Time: </b></li>\n" +
-                "  <li><b>One Day Shipping Available: </b></li>\n" +
-                "  <li><b>Shipping Type: </b></li>\n" +
-                "  <li><b>Shipping From: </b></li>\n" +
-                "  <li><b>Ship To Locations: </b></li>\n" +
-                "  <li><b>Expedited Shipping: </b></li>\n" +
-                "</ul>  \n";
+        String handlingTime = item.getString("HandlingTime");
+
+        String oneDayShippingAvailable = "No";
+        if (itemAdvanced.getString("oneDayShippingAvailable").equals("true")) {
+            oneDayShippingAvailable = "Yes";
+        }
+
+        String shippingType = itemAdvanced.getString("shippingType");
+        
+        String shippingBulletListHTML = String.format("<ul>\n" +
+                "  <li><b>Handling  Time: </b>%s</li>\n" +
+                "  <li><b>One Day Shipping Available: </b>%s</li>\n" +
+                "  <li><b>Shipping Type: </b>%s</li>\n" +
+                "  <li><b>Shipping From: </b>%s</li>\n" +
+                "  <li><b>Ship To Locations: </b>%s</li>\n" +
+                "  <li><b>Expedited Shipping: </b>%s</li>\n" +
+                "</ul>  \n", handlingTime, oneDayShippingAvailable, shippingType, 4, 5, 6, 7);
         TextView shippingBulletList = getView().findViewById(R.id.shippingBulletList);
         shippingBulletList.setText(Html.fromHtml(shippingBulletListHTML));
     }
