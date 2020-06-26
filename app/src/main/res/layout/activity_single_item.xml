@@ -25,6 +25,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!--    Progress Bar-->
     <ProgressBar
         android:id="@+id/singleItemProgressBar"
         style="?android:attr/progressBarStyleLarge"
@@ -43,10 +44,12 @@
         android:text="Searching Product Details..."
         android:visibility="visible" />
 
+    <!--    Fragments-->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:visibility="gone"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

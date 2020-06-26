@@ -18,6 +18,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SingleItem extends AppCompatActivity {
@@ -96,6 +98,16 @@ public class SingleItem extends AppCompatActivity {
                         singleItemProgressBar.setVisibility(View.GONE);
                         TextView singleItemProgressText = findViewById(R.id.singleItemProgressText);
                         singleItemProgressText.setVisibility(View.GONE);
+
+                        // Get the JSONObject of the response
+                        try {
+                            JSONObject item = response.getJSONObject("Item");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Display the Fragment Container
+                        viewPager.setVisibility(View.VISIBLE);
 
                     }
                 }, new Response.ErrorListener() {
