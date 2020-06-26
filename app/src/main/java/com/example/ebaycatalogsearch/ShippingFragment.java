@@ -11,12 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 public class ShippingFragment extends Fragment {
 
-    private String itemString;
     private String itemAdvancedString;
 
     @Nullable
@@ -29,7 +31,6 @@ public class ShippingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Initialize the itemString from the itemString passed by SingleItem activity
-        itemString = getArguments().getString("itemString");
         itemAdvancedString = getArguments().getString("itemAdvancedString");
         try {
             createShippingInformation();
@@ -41,7 +42,6 @@ public class ShippingFragment extends Fragment {
 
     private void createShippingInformation() throws JSONException {
         // Create the JSONObject
-        JSONObject item = new JSONObject(itemString);
         JSONObject itemAdvanced = new JSONObject(itemAdvancedString);
 
         // Set the shippingInformationTitle
@@ -50,24 +50,45 @@ public class ShippingFragment extends Fragment {
         shippingInformationTitle.setText(Html.fromHtml(shippingInformationTitleHTML));
 
         // Set the shippingBulletList
-        String handlingTime = item.getString("HandlingTime");
+        JSONObject shippingInfo = itemAdvanced.getJSONArray("shippingInfo").getJSONObject(0);
 
-        String oneDayShippingAvailable = "No";
-        if (itemAdvanced.getString("oneDayShippingAvailable").equals("true")) {
-            oneDayShippingAvailable = "Yes";
+        Iterator<String> keys = shippingInfo.keys();
+
+        String shippingBulletListHTML = "<ul>";
+
+        while(keys.hasNext()) {
+            String key = keys.next();
+            if (!key.equals("shippingServiceCost")) {
+                JSONArray keyValueArray = shippingInfo.getJSONArray(key);
+                String value = keyValueArray.getString(0);
+
+                if (value.equals("true")) {
+                    value = "Yes";
+                } else if (value.equals("false")) {
+                    value = "No";
+                }
+
+                String bulletEntry = String.format("<li><b>%s: </b>%s</li>", convertToReadable(key), value);
+
+                shippingBulletListHTML += bulletEntry;
+
+            }
         }
 
-        String shippingType = itemAdvanced.getString("shippingType");
-        
-        String shippingBulletListHTML = String.format("<ul>\n" +
-                "  <li><b>Handling  Time: </b>%s</li>\n" +
-                "  <li><b>One Day Shipping Available: </b>%s</li>\n" +
-                "  <li><b>Shipping Type: </b>%s</li>\n" +
-                "  <li><b>Shipping From: </b>%s</li>\n" +
-                "  <li><b>Ship To Locations: </b>%s</li>\n" +
-                "  <li><b>Expedited Shipping: </b>%s</li>\n" +
-                "</ul>  \n", handlingTime, oneDayShippingAvailable, shippingType, 4, 5, 6, 7);
+        shippingBulletListHTML += "</ul>";
+
         TextView shippingBulletList = getView().findViewById(R.id.shippingBulletList);
         shippingBulletList.setText(Html.fromHtml(shippingBulletListHTML));
+    }
+
+    private String convertToReadable(String camelCase) {
+
+        String[] splitCamelCaseArray = camelCase.split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])");
+
+        String readableString = String.join(" ", splitCamelCaseArray);
+
+        readableString = readableString.substring(0,1).toUpperCase() + readableString.substring(1);
+
+        return readableString;
     }
 }
