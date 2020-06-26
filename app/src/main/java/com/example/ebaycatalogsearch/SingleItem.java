@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -29,7 +31,7 @@ public class SingleItem extends AppCompatActivity {
     private TabLayout tabLayout;
     private int[] tabIconArray = {
             R.drawable.information_variant_selector,
-            R.drawable.ic_seller,
+            R.drawable.ic_seller_blue,
             R.drawable.truck_delivery_selector
     };
 
@@ -73,6 +75,7 @@ public class SingleItem extends AppCompatActivity {
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIconArray[0]);
         tabLayout.getTabAt(1).setIcon(tabIconArray[1]);
+        tabLayout.getTabAt(1).getIcon().setColorFilter(Color.parseColor("#0063D1"), PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(2).setIcon(tabIconArray[2]);
     }
 
