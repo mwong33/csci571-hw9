@@ -31,7 +31,7 @@ public class SingleItem extends AppCompatActivity {
     private TabLayout tabLayout;
     private int[] tabIconArray = {
             R.drawable.information_variant_selector,
-            R.drawable.ic_seller_blue,
+            R.drawable.ic_seller,
             R.drawable.truck_delivery_selector
     };
 
