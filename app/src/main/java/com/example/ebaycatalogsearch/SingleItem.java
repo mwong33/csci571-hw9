@@ -40,6 +40,11 @@ public class SingleItem extends AppCompatActivity {
             R.drawable.truck_delivery_selector
     };
 
+    // Fragments
+    ProductFragment productFragment;
+    SellerInfoFragment sellerInfoFragment;
+    ShippingFragment shippingFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +61,10 @@ public class SingleItem extends AppCompatActivity {
         // Initialize the requestQueue
         requestQueue = Volley.newRequestQueue(this);
 
-        // Make the getSingleItem request
-        getSingleItem();
+        // Initialize the Fragments
+        productFragment = new ProductFragment();
+        sellerInfoFragment = new SellerInfoFragment();
+        shippingFragment = new ShippingFragment();
 
         // Tab View Creation
         sectionsPageadapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -67,13 +74,16 @@ public class SingleItem extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
+
+        // Make the getSingleItem request
+        getSingleItem();
     }
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = sectionsPageadapter;
-        adapter.addFragment(new ProductFragment(), "Product");
-        adapter.addFragment(new SellerInfoFragment(), "Seller Info");
-        adapter.addFragment(new ShippingFragment(), "Shipping");
+        adapter.addFragment(productFragment, "Product");
+        adapter.addFragment(sellerInfoFragment, "Seller Info");
+        adapter.addFragment(shippingFragment, "Shipping");
         viewPager.setAdapter(adapter);
     }
 
@@ -99,12 +109,21 @@ public class SingleItem extends AppCompatActivity {
                         TextView singleItemProgressText = findViewById(R.id.singleItemProgressText);
                         singleItemProgressText.setVisibility(View.GONE);
 
-                        // Get the JSONObject of the response
+                        // Get the JSONObject of the response]
+                        JSONObject item = new JSONObject();
                         try {
-                            JSONObject item = response.getJSONObject("Item");
+                            item = response.getJSONObject("Item");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        // Pass the item JSONObject to the fragments
+                        Bundle itemBundle = new Bundle();
+                        itemBundle.putString("itemString", item.toString());
+
+                        productFragment.setArguments(itemBundle);
+                        sellerInfoFragment.setArguments(itemBundle);
+                        shippingFragment.setArguments(itemBundle);
 
                         // Display the Fragment Container
                         viewPager.setVisibility(View.VISIBLE);
