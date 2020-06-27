@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 public class ProductFragment extends Fragment {
 
     private String itemString;
@@ -128,6 +130,46 @@ public class ProductFragment extends Fragment {
             e.printStackTrace();
         }
 
+        // Check to display the Specifications
+        try {
+            displaySpecifications();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displaySpecifications() throws JSONException {
+
+        JSONObject item = new JSONObject(itemString);
+
+        if (item.has("ItemSpecifics") && item.getJSONObject("ItemSpecifics").has("NameValueList")) {
+            LinearLayout specificationsLinearView = getView().findViewById(R.id.specificationsLinearView);
+
+            int filteredCount = 0;
+            JSONArray specs = item.getJSONObject("ItemSpecifics").getJSONArray("NameValueList");
+
+            String bulletListHMTL = "<ul>";
+
+            for (int i = 0; (i < specs.length()) && (i < 5);  i++) {
+                if (!specs.getJSONObject(i).getString("Name").equals("Brand")) {
+                    filteredCount++;
+
+                    String value = specs.getJSONObject(i).getJSONArray("Value").getString(0);
+
+                    String bulletEntry = String.format("<li>%s</li>", value);
+                    bulletListHMTL += bulletEntry;
+                }
+            }
+
+            bulletListHMTL += "</ul>";
+
+            if (filteredCount > 0) {
+                TextView specificationsBulletList = getView().findViewById(R.id.specificationsBulletList);
+                specificationsBulletList.setText(Html.fromHtml(bulletListHMTL));
+                specificationsLinearView.setVisibility(View.VISIBLE);
+            }
+
+        }
     }
 
     private void displayImageLinearView() throws JSONException {
