@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -83,6 +85,15 @@ public class SingleItem extends AppCompatActivity {
 
         // Make the getSingleItem request
         getSingleItem();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.redirect_menu, menu);
+
+        return true;
     }
 
     private void setupViewPager(ViewPager viewPager) {
