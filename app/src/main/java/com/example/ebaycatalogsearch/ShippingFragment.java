@@ -44,11 +44,6 @@ public class ShippingFragment extends Fragment {
         // Create the JSONObject
         JSONObject itemAdvanced = new JSONObject(itemAdvancedString);
 
-        // Set the shippingInformationTitle
-        String shippingInformationTitleHTML = "<p style=\"color:black\"><b>Shipping Information</b></p>";
-        TextView shippingInformationTitle = getView().findViewById(R.id.shippingInformationTitle);
-        shippingInformationTitle.setText(Html.fromHtml(shippingInformationTitleHTML));
-
         // Set the shippingBulletList
         JSONObject shippingInfo = itemAdvanced.getJSONArray("shippingInfo").getJSONObject(0);
 

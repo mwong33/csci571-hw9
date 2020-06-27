@@ -45,20 +45,10 @@ public class SellerInfoFragment extends Fragment {
         // Create the JSONObject
         JSONObject item = new JSONObject(itemString);
 
-        // Set the sellerInformationTitle
-        String sellerInformationTitleHTML = "<p style=\"color:black\"><b>Seller Information</b></p>";
-        TextView sellerInformationTitle = getView().findViewById(R.id.sellerInformationTitle);
-        sellerInformationTitle.setText(Html.fromHtml(sellerInformationTitleHTML));
-
         // Set the sellerBulletList
         JSONObject seller = item.getJSONObject("Seller");
         TextView sellerBulletList = getView().findViewById(R.id.sellerBulletList);
         sellerBulletList.setText(Html.fromHtml(createBulletList(seller)));
-
-        // Set the returnPoliciesTitle
-        String returnPoliciesTitleHTML = "<p style=\"color:black\"><b>Return Policies</b></p>";
-        TextView returnPoliciesTitle = getView().findViewById(R.id.returnPoliciesTitle);
-        returnPoliciesTitle.setText(Html.fromHtml(returnPoliciesTitleHTML));
 
         // Set the returnPoliciesBulletList
         JSONObject returnPolicy = item.getJSONObject("ReturnPolicy");
