@@ -80,7 +80,49 @@ public class ProductFragment extends Fragment {
             JSONObject item = new JSONObject(itemString);
 
             // Check if either Subtitle or Brand are within the JSON Object
+            boolean hasSubtitle = false;
+            boolean hasBrand = false;
 
+            if (item.has("Subtitle")) {
+                hasSubtitle = true;
+            }
+
+            if (item.has("ItemSpecifics")) {
+                JSONObject itemSpecifics = item.getJSONObject("ItemSpecifics");
+                if (itemSpecifics.has("NameValueList")) {
+                    JSONArray nameValueList = itemSpecifics.getJSONArray("NameValueList");
+                    if (nameValueList.length() > 0) {
+                        JSONObject brandObject = nameValueList.getJSONObject(0);
+                        if (brandObject.has("Name") && brandObject.get("Name").equals("Brand")) {
+                            if (brandObject.has("Value")) {
+                                hasBrand = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (hasSubtitle) {
+                LinearLayout subtitleHorizontalView = getView().findViewById(R.id.subtitleHorizontalView);
+                TextView subtitleValue = getView().findViewById(R.id.subtitleValue);
+                subtitleValue.setText(item.getString("Subtitle"));
+                subtitleHorizontalView.setVisibility(View.VISIBLE);
+            }
+
+            if (hasBrand) {
+                LinearLayout brandHorizontalView = getView().findViewById(R.id.brandHorizontalView);
+                TextView brandValue = getView().findViewById(R.id.brandValue);
+
+                String brandString = item.getJSONObject("ItemSpecifics").getJSONArray("NameValueList")
+                        .getJSONObject(0).getJSONArray("Value").getString(0);
+
+                brandValue.setText(brandString);
+                brandHorizontalView.setVisibility(View.VISIBLE);
+            }
+
+            if (hasSubtitle || hasBrand) {
+                productFeaturesLinearView.setVisibility(View.VISIBLE);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
