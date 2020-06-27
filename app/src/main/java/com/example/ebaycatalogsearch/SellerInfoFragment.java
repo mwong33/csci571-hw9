@@ -55,6 +55,16 @@ public class SellerInfoFragment extends Fragment {
         TextView sellerBulletList = getView().findViewById(R.id.sellerBulletList);
         sellerBulletList.setText(Html.fromHtml(createBulletList(seller)));
 
+        // Set the returnPoliciesTitle
+        String returnPoliciesTitleHTML = "<p style=\"color:black\"><b>Return Policies</b></p>";
+        TextView returnPoliciesTitle = getView().findViewById(R.id.returnPoliciesTitle);
+        returnPoliciesTitle.setText(Html.fromHtml(returnPoliciesTitleHTML));
+
+        // Set the returnPoliciesBulletList
+        JSONObject returnPolicy = item.getJSONObject("ReturnPolicy");
+        TextView returnPoliciesBulletList = getView().findViewById(R.id.returnPoliciesBulletList);
+        returnPoliciesBulletList.setText(Html.fromHtml(createBulletList(returnPolicy)));
+
     }
 
     private String createBulletList(JSONObject json) throws JSONException{
