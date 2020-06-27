@@ -1,6 +1,7 @@
 package com.example.ebaycatalogsearch;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,48 @@ public class ProductFragment extends Fragment {
         // Set the imageLinearView
         try {
             displayImageLinearView();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Display the Item Title, Price and Shipping Price
+        TextView itemTitle = getView().findViewById(R.id.itemTitle);
+        TextView itemPrice = getView().findViewById(R.id.itemPrice);
+        TextView itemShippingPrice = getView().findViewById(R.id.itemShippingPrice);
+
+        try {
+            JSONObject itemAdvanced = new JSONObject(itemAdvancedString);
+
+            // Title
+            String titleString = itemAdvanced.getString("title");
+            itemTitle.setText(titleString);
+
+            // Price
+            String priceString = "$" + itemAdvanced.getString("sellingPrice");
+            itemPrice.setText(priceString);
+
+            // Shipping Price
+            String shippingPriceString = "Ships for $" + itemAdvanced.getString("shippingCost");
+
+            if (itemAdvanced.getString("shippingCost").equals("0.0")) {
+                shippingPriceString = "FREE Shipping";
+            }
+
+            itemShippingPrice.setText(shippingPriceString);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Check to display the Product Features
+        LinearLayout productFeaturesLinearView = getView().findViewById(R.id.productFeaturesLinearView);
+
+        try {
+            JSONObject item = new JSONObject(itemString);
+
+            // Check if either Subtitle or Brand are within the JSON Object
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
