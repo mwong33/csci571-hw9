@@ -1,4 +1,4 @@
-# ebay-list-android
+# ebay-search-android
 An Android app that allows users to search items on Ebay!
 
 # Objective
