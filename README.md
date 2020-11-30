@@ -1,5 +1,5 @@
 # ebay-search-android
-An Android app that allows users to search items on Ebay!
+An android app that allows users to search items on Ebay!
 
 # Objective
 This is Part 3 of a series of projects I did to learn more about Ebay's public API: https://developer.ebay.com/DevZone/finding/CallRef/findItemsAdvanced.html
